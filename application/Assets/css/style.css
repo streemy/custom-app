@@ -1,0 +1,244 @@
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: #969696;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+}
+
+:hover,
+:active,
+:after,
+:before,
+:visited,
+p,
+a,
+h1 {
+    text-decoration: none;
+}
+
+:active,
+:visited,
+p,
+a,
+h1 {
+    color: #333333;
+    text-decoration: none;
+}
+
+a .button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+
+a.link {
+    display: inline-block;
+    background-color: #009afd;
+    color: #fff;
+    width: 100px;
+    height: 20px;
+    padding: 5px 15px;
+    transition: all 0.3s ease-out 0s;
+}
+
+a:hover.link {
+    background-color: #f59a07;
+    color: #000;
+}
+
+
+.clear {
+    clear: both;
+    float: none;
+    width: 100%;
+}
+
+#wrapper {
+    margin: 0 auto;
+    min-width: 600px;
+    width: 1024px;
+}
+
+/* HEADER Style */
+
+#header {
+    height: 60px;
+}
+
+.languages-checker {
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    float: right;
+}
+
+ul.languages li {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    width: 50px;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+ul.languages li > a {
+    display: block;
+    padding: 5px;
+    background-color: #009afd;
+    color: #fff;
+    transition: all 0.3s ease-out 0s;
+
+
+}
+
+ul.languages li:hover > a,
+ul.languages li > a.active {
+    background-color: #f59a07;
+    color: #000;
+}
+
+/* Content Style */
+.content {
+    margin: 20px auto;
+    width: 1024px;
+    min-height: 450px;
+}
+
+.content-header {
+
+}
+
+/* HOMEPAGE Style*/
+.home-buttons {
+    margin: 20px auto;
+    width: 700px;
+    padding-top: 5%;
+}
+
+.sign-in,
+.sign-up {
+    background-color: #f59a07;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sign-up {
+    background-color: #009afd;
+    margin-left: 55px;
+}
+
+.button {
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    padding: 20px 60px;
+    transition: all 0.3s ease-out 0s;
+}
+
+.ru .sign-up .button h2 {
+    position: relative;
+    left: -38px;
+    padding-top: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Forms and Profile styles*/
+input[type=text],
+input[type=file],
+input[type=password] {
+    width: 320px;
+    height: 30px;
+    margin: 10px 0px;
+}
+
+input[type=text],
+input[type=password] {
+    border-radius: 5px;
+    padding: 2px 6px;
+}
+
+#sign-in-form,
+#sign-up-form {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.avatar img {
+    width: 225px;
+    height: 225px;
+    border-radius: 150px;
+    border: 4px solid #009afd;
+    box-shadow: 3px 3px 8px #f59a07;
+    float: left;
+}
+
+.block {
+    display: block;
+    width: 320px;
+    margin-bottom: 10px;
+}
+
+.require {
+    color: #f2246c;
+}
+
+.button h2 {
+    padding-top: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.error {
+    color: rgb(237, 69, 40);
+    background-color: rgba(244, 172, 161, 0.3);
+    padding: 3px 7px;
+    display: block;
+    border: 1px solid rgba(237, 69, 40, 0.5);
+}
+
+/* 404 PAGE Style */
+.not-found-page {
+    line-height: 50px;
+    margin: 70px auto;
+    text-align: center;
+    width: 400px;
+    padding: 20px;
+    border: 2px solid #f2246c;
+    font-weight: bold;
+}
+.not-found-page h2 {
+    font-size: 70px;
+}
+
+.not-found-page h3 {
+    font-size: 35px;
+}
+
+/* FOOTER Style */
+#footer {
+    width: 982px;
+    height: 40px;
+    padding: 10px 20px;
+    background-color: #f59a07;
+    color: #555;
+}
+
+#footer h2 {
+    color: #333;
+    font-size: 17px;
+    font-weight: bold;
+}
