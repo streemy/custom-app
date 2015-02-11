@@ -2,6 +2,15 @@
 
 class UserModel extends Model
 {
+    /**
+     * validate data from user login form
+     *
+     * @param $userName
+     * @param $userPassword
+     *
+     * @return array - with values and error messages of data
+     * @return true - if data is valid
+     */
     public function authValidate($userName, $userPassword)
     {
         $result = array();
@@ -75,6 +84,13 @@ class UserModel extends Model
         return $result;
     }
 
+    /**
+     * validate image file from registration-form
+     *
+     * @param $img
+     *
+     * @return array
+     */
     public function imgValidate($img)
     {
         $result = array(
@@ -113,6 +129,13 @@ class UserModel extends Model
         return $result;
     }
 
+    /**
+     * prepare string
+     *
+     * @param $value
+     *
+     * @return string
+     */
     public function prepareValue($value)
     {
         $value = trim($value);
@@ -122,6 +145,14 @@ class UserModel extends Model
         return $value;
     }
 
+    /**
+     * validate data from user registration form
+     *
+     * @param $userData
+     *
+     * @return array - with values and error messages of data
+     * @return true - if data is valid
+     */
     public function regValidate($userData)
     {
         $user = array();
@@ -134,8 +165,6 @@ class UserModel extends Model
                 $user[$field] = $this->prepareValue($value);
             }
         }
-
-
 
         foreach ($user as $field => $value) {
 
@@ -197,6 +226,13 @@ class UserModel extends Model
         }
     }
 
+    /**
+     * save image
+     *
+     * @param $img
+     *
+     * @return string - name of img in uploads-folder
+     */
     protected function saveImage($img)
     {
         $info = pathinfo($img['name']);
@@ -211,6 +247,13 @@ class UserModel extends Model
         return $newName;
     }
 
+    /**
+     * save user to users table
+     *
+     * @param $user
+     *
+     * @return int
+     */
     protected function saveUser($user)
     {
         $user['avatar'] = $this->saveImage($user['avatar']);
@@ -231,6 +274,13 @@ class UserModel extends Model
         return $this->getUserIdByLogin($user['login']);
     }
 
+    /**
+     * prepare and save data of user from reg-form
+     *
+     * @param $user
+     *
+     * @return int
+     */
     public function prepareAndSave($user)
     {
         $user = $this->prepareUser($user);
@@ -239,6 +289,13 @@ class UserModel extends Model
         return $result;
     }
 
+    /**
+     * prepare user data, before saving it to DB
+     *
+     * @param $userData
+     *
+     * @return array
+     */
     protected function prepareUser($userData)
     {
         $user = array();
