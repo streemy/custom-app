@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Class Translator
+ */
 class Translator {
 
+    /**
+     * include translation file for needed locale
+     *
+     * @return array - array of translations
+     */
     public static function getTranslations() {
 
         $translationFIleName = $_SESSION['lang'].'.php';
@@ -21,11 +29,24 @@ class Translator {
         return $translations;
     }
 
+    /**
+     * get language from session
+     *
+     * @return string
+     */
     public static function getLocale()
     {
         return $_SESSION['lang'];
     }
 
+    /**
+     * Translate strings,
+     *
+     *
+     * @param $string
+     *
+     * @return string
+     */
     public static function translate($string)
     {
         $translations = self::getTranslations();
@@ -39,6 +60,13 @@ class Translator {
     }
 
 
+    /**
+     * Generate url with lang parameter,
+     *
+     * @param $locale
+     *
+     * @return string - like http://example.com/user/login/?lang={$locale}
+     */
     public static function languageSwitcher($locale)
     {
         $validLocales = array('ru','en');

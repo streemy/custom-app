@@ -9,7 +9,7 @@ class DB  {
     const USER = 'streem';
     const PASS = 'MaNu2015';
 
-    public static  function getInstance()
+    public static function getInstance()
     {
 
         if (is_null(self::$db)) {

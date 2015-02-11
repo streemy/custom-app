@@ -11,32 +11,34 @@ class UserController extends Controller
 
     public function loginAction()
     {
-        if($this->model->isUserLogin()) {
-            header('Location: '.SITE_URL.'/user/profile/');
+        if ($this->model->isUserLogin()) {
+            header('Location: ' . SITE_URL . '/user/profile/');
         }
-
 
         $sessionKey = SESSION_AUTH_FORM_KEY;
         $fieldLogin = false;
         $fieldPassword = false;
 
-        if(array_key_exists('password', $_GET) || array_key_exists('login', $_GET)) {
+        if (array_key_exists('password', $_POST) || array_key_exists('login', $_POST)) {
 
-            $userName = $_GET['login'];
-            $userPassword = $_GET['password'];
+
+            $userName = $_POST['login'];
+            $userPassword = $_POST['password'];
 
             $validate = $this->model->authValidate($userName, $userPassword);
-            if($validate !== true) {
 
-                if(array_key_exists('userName', $validate)) {
+
+            if ($validate !== true) {
+
+                if (array_key_exists('userName', $validate)) {
                     $_SESSION[$sessionKey]['login'] = $validate['userName'];
                 }
 
-                if(array_key_exists('userPassword', $validate)) {
+                if (array_key_exists('userPassword', $validate)) {
                     $_SESSION[$sessionKey]['password'] = $validate['userPassword'];
                 }
 
-                header('Location: '.SITE_URL.'/user/login/');
+                header('Location: ' . SITE_URL . '/user/login/');
             } else {
 
                 unset($_SESSION[$sessionKey]);
@@ -45,19 +47,17 @@ class UserController extends Controller
 
                 $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID] = $userId;
 
-                header('Location: '.SITE_URL.'/user/profile/');
+                header('Location: ' . SITE_URL . '/user/profile/');
             }
-
-
         }
 
-        if(array_key_exists($sessionKey, $_SESSION)) {
+        if (array_key_exists($sessionKey, $_SESSION)) {
 
-            if(array_key_exists('login', $_SESSION[$sessionKey])) {
+            if (array_key_exists('login', $_SESSION[$sessionKey])) {
                 $fieldLogin = $_SESSION[$sessionKey]['login'];
             }
 
-            if(array_key_exists('password', $_SESSION[$sessionKey])) {
+            if (array_key_exists('password', $_SESSION[$sessionKey])) {
                 $fieldPassword = $_SESSION[$sessionKey]['password'];
             }
 
@@ -66,23 +66,30 @@ class UserController extends Controller
         $this->getModel()->setTitle(Translator::translate('auth'));
 
         $data = array(
-            'fieldLogin'    => $fieldLogin,
+            'fieldLogin' => $fieldLogin,
             'fieldPassword' => $fieldPassword,
+            'assetsFiles' => array(
+                'css' => array(),
+                'js' => array(
+                    'login-form-validator',
+                    'translator',
+                ),
+            )
         );
 
         $this->getModel()->setData($data);
 
         $this->view->render(
-           'login-form',
-           'basic-template',
-           $this->getModel()->getData()
-       );
+            'login-form',
+            'basic-template',
+            $this->getModel()->getData()
+        );
     }
 
     public function registrationAction()
     {
-        if($this->model->isUserLogin()) {
-            header('Location: '.SITE_URL.'/user/profile/');
+        if ($this->model->isUserLogin()) {
+            header('Location: ' . SITE_URL . '/user/profile/');
         }
 
         $userData['login'] = false;
@@ -97,35 +104,35 @@ class UserController extends Controller
 
         $sessionKey = SESSION_REG_FORM_KEY;
 
-        if(array_key_exists('user', $_POST)) {
+        if (array_key_exists('user', $_POST)) {
 
             $userData = $_POST['user'];
             $userData['avatar'] = $_FILES['user-avatar'];
 
             $result = $this->model->regValidate($userData);
 
-                if($result !== true) {
+            if ($result !== true) {
 
-                    if(array_key_exists('user', $result)) {
+                if (array_key_exists('user', $result)) {
 
-                            $_SESSION[$sessionKey]['user'] = $result['user'];
-                    }
+                    $_SESSION[$sessionKey]['user'] = $result['user'];
+                }
 
-                header('Location: '.SITE_URL.'/user/registration/');
+                header('Location: ' . SITE_URL . '/user/registration/');
             } else {
-                    unset($_SESSION[$sessionKey]);
-                    $userId = $this->model->prepareAndSave($userData);
-                    $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID] = $userId;
+                unset($_SESSION[$sessionKey]);
+                $userId = $this->model->prepareAndSave($userData);
+                $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID] = $userId;
 
-                    header('Location: '.SITE_URL.'/user/profile/');
+                header('Location: ' . SITE_URL . '/user/profile/');
             }
 
 
         }
 
-        if(array_key_exists($sessionKey, $_SESSION)) {
+        if (array_key_exists($sessionKey, $_SESSION)) {
 
-            if(array_key_exists('user', $_SESSION[$sessionKey])) {
+            if (array_key_exists('user', $_SESSION[$sessionKey])) {
                 $userData = $_SESSION[$sessionKey]['user'];
             }
 
@@ -135,15 +142,22 @@ class UserController extends Controller
         $this->getModel()->setTitle(Translator::translate('registration-form'));
 
         $data = array(
-            'fieldLogin'          => $userData['login'],
-            'fieldPassword'       => $userData['password'],
+            'fieldLogin' => $userData['login'],
+            'fieldPassword' => $userData['password'],
             'fieldPasswordRepeat' => $userData['password-repeat'],
-            'fieldEmail'          => $userData['email'],
-            'fieldFirstname'      => $userData['firstname'],
-            'fieldLastname'       => $userData['lastname'],
-            'fieldAvatar'         => $userData['avatar'],
-            'fieldCountry'        => $userData['country'],
-            'fieldCity'           => $userData['city'],
+            'fieldEmail' => $userData['email'],
+            'fieldFirstname' => $userData['firstname'],
+            'fieldLastname' => $userData['lastname'],
+            'fieldAvatar' => $userData['avatar'],
+            'fieldCountry' => $userData['country'],
+            'fieldCity' => $userData['city'],
+            'assetsFiles' => array(
+                'css' => array(),
+                'js' => array(
+                    'registration-form-validator',
+                    'translator',
+                ),
+            )
         );
 
         $this->getModel()->setData($data);
@@ -157,7 +171,7 @@ class UserController extends Controller
 
     public function profileAction()
     {
-        if(array_key_exists(USERS_SESSION_TOKEN, $_SESSION) && array_key_exists(USER_SESSION_ID, $_SESSION[USERS_SESSION_TOKEN])) {
+        if (array_key_exists(USERS_SESSION_TOKEN, $_SESSION) && array_key_exists(USER_SESSION_ID, $_SESSION[USERS_SESSION_TOKEN])) {
 
             $userId = $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID];
 
@@ -177,16 +191,17 @@ class UserController extends Controller
 
         } else {
 
-            header('Location: '.SITE_URL.'/404/');
+            header('Location: ' . SITE_URL . '/404/');
         }
 
     }
 
-    public function logoutAction() {
-        if(array_key_exists(USERS_SESSION_TOKEN, $_SESSION) && array_key_exists(USER_SESSION_ID, $_SESSION[USERS_SESSION_TOKEN])) {
+    public function logoutAction()
+    {
+        if (array_key_exists(USERS_SESSION_TOKEN, $_SESSION) && array_key_exists(USER_SESSION_ID, $_SESSION[USERS_SESSION_TOKEN])) {
             unset($_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID]);
 
-            header('Location: '.SITE_URL.'/');
+            header('Location: ' . SITE_URL . '/');
         }
     }
 }

@@ -15,10 +15,5 @@ class Controller {
     {
         return $this->model;
     }
-
-    public function indexAction()
-    {
-    }
-
 }
 

@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Class Route
+ */
 class Route
 {
+    /**
+     * get controller name and action name from uri,
+     * include needed files,
+     * execute needed method of controller,
+     * if controller file or method of controller not found, redirected to 404 page controller
+     *
+     *
+     */
     public static function start()
     {
         $controllerName = 'index';
@@ -78,6 +89,9 @@ class Route
 
     }
 
+    /**
+     * redirect to 404 page
+     */
     public function ErrorPage404()
     {
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';

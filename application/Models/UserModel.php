@@ -14,12 +14,12 @@ class UserModel extends Model
 
                 $result['userName'] = array(
                     'value' => $userName,
-                    'message' => $this->trans('user-do-not-exist-error'),
+                    'message' => Translator::translate('user-do-not-exist-error'),
                 );
 
                 $result['userPassword'] = array(
                     'value' => $userPassword,
-                    'message' => $this->trans('enter-password-error'),
+                    'message' => Translator::translate('enter-password-error'),
                 );
 
                 return $result;
@@ -34,7 +34,7 @@ class UserModel extends Model
 
                 $result['userPassword'] = array(
                     'value' => false,
-                    'message' => $this->trans('enter-valid-password-error'),
+                    'message' => Translator::translate('enter-valid-password-error'),
                 );
 
                 return $result;
@@ -49,7 +49,7 @@ class UserModel extends Model
             if (empty($userName)) {
                 $result['userName'] = array(
                     'value' => false,
-                    'message' => $this->trans('enter-login-error'),
+                    'message' => Translator::translate('enter-login-error'),
                 );
             } else {
                 $result['userName'] = array(
@@ -61,7 +61,7 @@ class UserModel extends Model
             if (empty($userPassword)) {
                 $result['userPassword'] = array(
                     'value' => false,
-                    'message' => $this->trans('enter-password-error'),
+                    'message' => Translator::translate('enter-password-error'),
                 );
             } else {
                 $result['userPassword'] = array(
@@ -70,6 +70,7 @@ class UserModel extends Model
                 );
             }
         }
+
 
         return $result;
     }
@@ -84,7 +85,7 @@ class UserModel extends Model
         if ($img['name'] == '') {
             $result = array(
                 'value' => false,
-                'message' => $this->trans('blank-message-avatar'),
+                'message' => Translator::translate('blank-message-avatar'),
             );
 
         } else {
@@ -94,7 +95,7 @@ class UserModel extends Model
             if ($img['size'] > $imgValidSize) {
                 $result = array(
                     'value' => false,
-                    'message' => $this->trans('size-error-message-avatar'),
+                    'message' => Translator::translate('size-error-message-avatar'),
                 );
             }
 
@@ -103,7 +104,7 @@ class UserModel extends Model
             if (!in_array($img['type'], $imgValidTypes)) {
                 $result = array(
                     'value' => false,
-                    'message' => $this->trans('type-error-message-avatar'),
+                    'message' => Translator::translate('type-error-message-avatar'),
                 );
             }
 
@@ -141,7 +142,7 @@ class UserModel extends Model
             if (empty($user[$field])) {
                 $result['user'][$field] = array(
                     'value' => false,
-                    'message' => sprintf($this->trans('blank-message'), $this->trans('enter-' . $field . '-label'))
+                    'message' => sprintf(Translator::translate('blank-message'), Translator::translate('enter-' . $field . '-label'))
                 );
             } else {
                 $result['user'][$field] = array(
@@ -155,7 +156,7 @@ class UserModel extends Model
                 if (!$check) {
                     $result['user'][$field] = array(
                         'value' => $user[$field],
-                        'message' => $this->trans('email-message-error'),
+                        'message' => Translator::translate('email-message-error'),
                     );
                 }
             }
@@ -164,7 +165,7 @@ class UserModel extends Model
                 if ($user[$field] != $user['password']) {
                     $result['user'][$field] = array(
                         'value' => $user[$field],
-                        'message' => $this->trans('repeat-password-message-error'),
+                        'message' => Translator::translate('repeat-password-message-error'),
                     );
 
                     $result['user']['password'] = array(
@@ -177,7 +178,7 @@ class UserModel extends Model
             if ($field == 'login' && $this->isExists($user['login']) != false) {
                 $result['user'][$field] = array(
                     'value' => $user[$field],
-                    'message' => $this->trans('exists-message-login'),
+                    'message' => Translator::translate('exists-message-login'),
                 );
             }
         }

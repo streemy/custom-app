@@ -35,7 +35,7 @@ $translations = array(
     'blank-message-avatar' => 'Photo (avatar) is required. Upload an image with the extension jpg, png or gif. And size up to 2MB',
     'type-error-message-avatar' => 'Error. Incorrect extension photo (avatar). Upload an image with the extension jpg, png or gif. And size up to 2MB',
     'size-error-message-avatar' => 'Error. Photo (avatar) bigger than 2MB. Upload an image with the extension jpg, png or gif. And size up to 2MB',
-    'email-message-error' => 'Email is invalid. PLease, enter valid Email',
+    'email-message-error' => 'Email is invalid. Please, enter valid Email',
     'repeat-password-message-error' => 'Passwords do not match',
 
     //Errors translations

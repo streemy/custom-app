@@ -4,8 +4,6 @@ class Model
 {
     protected $db;
 
-    protected $assetsFiles = array();
-
     protected $title;
 
     protected $data;
@@ -14,76 +12,20 @@ class Model
     {
         $this->db = DB::getInstance();
 
-        $assetsFiles = array(
-            'css' => array(
-//                'enter names of css files, that you want include in some page',
-            ),
-            'js' => array(
-//                'enter names of js files, that you want include in some page',
-            ),
-        );
-
-        $this->assetsFiles = $this->registerAssets($assetsFiles);
-
         $this->setTitle(Translator::translate('title'));
-    }
-
-    /**
-     * Include js and css files to your project
-     *
-     *
-     * @param array $assets - array with names of css and js files
-     *
-     * @return string - html string of scripts (js) and links (css)
-     */
-    public function registerAssets($assets = array())
-    {
-        $default = array(
-            'css' => array(
-                'style',
-            ),
-            'js' => array(
-                'jquery-1.6.2',
-            ),
-        );
-
-        if(empty($assets)) {
-
-            $assets = $default;
-        } else {
-            $assets['css'] = array_merge($assets['css'], $default['css']);
-            $assets['js'] = array_merge($assets['js'], $default['js']);
-            $assets['css'] = array_unique($assets['css']);
-            $assets['js'] = array_unique($assets['js']);
-
-        }
-
-        $assetsHtmlString = '';
-
-        if(array_key_exists('css', $assets) && count($assets['css']) > 0) {
-            foreach($assets['css'] as $name) {
-                $assetsHtmlString .= '<link rel="stylesheet" href="'.CSS_DIR.'/'.$name.'.css" type="text/css">';
-            }
-        }
-
-        if(array_key_exists('js', $assets) && count($assets['js']) > 0) {
-            foreach($assets['js'] as $name) {
-                $assetsHtmlString .= '<script type="text/javascript" src="'.JS_DIR.'/'.$name.'.js"></script>';
-            }
-        }
-
-        return $assetsHtmlString;
     }
 
     public function setData($data) {
 
         $this->data = array(
             'title'         => $this->getTitle(),
-            'assetsFiles'   => $this->assetsFiles,
             'model'          => $this,
         );
 
-        $this->data = array_merge($this->data, $data);
+        if(is_array($data)) {
+            $this->data = array_merge($this->data, $data);
+        }
+
     }
 
     public function getData()
@@ -122,16 +64,27 @@ class Model
         }
     }
 
+    /**
+     * Return url reference for folder of uploads
+     *
+     * @return string
+     */
     public function getUploadURL() {
 
         return UPLOADS_URL;
     }
 
+    /**
+     * Get user id from session
+     *
+     * @return false  - if user did not authenticated
+     * @return int - return user id, if user authenticated
+     */
     public function getUserIdFromSession() {
 
         if($this->isUserLogin()) {
 
-            return $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID];
+            return (int) $_SESSION[USERS_SESSION_TOKEN][USER_SESSION_ID];
 
         } else {
 
@@ -139,6 +92,13 @@ class Model
         }
     }
 
+    /**
+     * Check is exist $login in table of users
+     *
+     * @param $login
+     *
+     * @return bool|mixed
+     */
     public function isExists($login)
     {
         $user = $this->getUserByLogin($login);
@@ -151,6 +111,13 @@ class Model
         return $user;
     }
 
+    /**
+     * Get user (array) by login from users table
+     *
+     * @param $login
+     *
+     * @return mixed
+     */
     public function getUserByLogin($login)
     {
         $login = array('login' => $login);
@@ -162,15 +129,29 @@ class Model
         return $user;
     }
 
+    /**
+     * Get user id by login from users table
+     *
+     * @param $login
+     *
+     * @return int
+     */
     public function getUserIdByLogin($login)
     {
         $userData = $this->getUserByLogin($login);
 
         $userId = $userData['id'];
 
-        return $userId;
+        return (int) $userId;
     }
 
+    /**
+     * Get user (array) by user_id from users table
+     *
+     * @param $id
+     *
+     * @return array
+     */
     public function getUserById($id)
     {
         $id = array('id' => $id);
@@ -189,6 +170,11 @@ class Model
         return $user['firstname'];
     }
 
+    /**
+     * get user name from DB by user id in session
+     *
+     * @return string
+     */
     public function getUserNameFromSession()
     {
         $userId = $this->getUserIdFromSession();

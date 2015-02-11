@@ -35,7 +35,7 @@ $translations = array(
     'blank-message-avatar' => 'Фото (аватар) обязательно для заполнения. Загрузите изображение с расширением jpg, png или gif. И размером до 2Мб',
     'type-error-message-avatar' => 'Ошибка. Неверное расширение фото (аватара). Загрузите изображение с расширением jpg, png или gif. И размером до 2Мб',
     'size-error-message-avatar' => 'Ошибка. Фото (аватар) больше чем 2Мб. Загрузите изображение с расширением jpg, png или gif. И размером до 2Мб',
-    'email-message-error' => 'Email адрес введен не верно.',
+    'email-message-error' => 'Email адрес введен не верно',
     'repeat-password-message-error' => 'Пароли не совпадают',
 
     //Errors translations

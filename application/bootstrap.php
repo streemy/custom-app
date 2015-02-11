@@ -1,7 +1,10 @@
 <?php
 include_once 'config.php';
 include_once 'core/InitApplication.php';
-error_reporting(E_ALL);
+
+/**
+ * array of core files
+ */
 $core = array(
     'DB',
     'Controller',
@@ -10,6 +13,7 @@ $core = array(
     'View',
     'Route',
 );
+
 session_start();
 if(isset($_GET['lang']) && ($_GET['lang'] != $_SESSION['lang'])) {
     unset($_SESSION[SESSION_AUTH_FORM_KEY]);
@@ -22,7 +26,9 @@ if(isset($_GET['lang'])) {
 if(!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = 'ru';
 }
-
+/**
+ * include core files to project
+ */
 InitApplication::includeCore($core);
 
 Route::start();

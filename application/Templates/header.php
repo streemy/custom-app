@@ -2,7 +2,8 @@
 <html>
 <head>
     <title><?php echo $this->data['title']; ?></title>
-    <?php echo $this->data['assetsFiles']; ?>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <?php echo $this->assetsFiles; ?>
 </head>
 <body class="<?php echo Translator::getLocale(); ?>">
 <div id="wrapper">
@@ -26,6 +27,4 @@
         <div class="clear"></div>
     </div>
     <div class="content">
-        <div class="content-header">
-
-        </div>
+        <div class="content-header"></div>
