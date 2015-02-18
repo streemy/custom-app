@@ -3,6 +3,7 @@
 <head>
     <title><?php echo $this->data['title']; ?></title>
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <?php echo $this->assetsFiles; ?>
 </head>
 <body class="<?php echo Translator::getLocale(); ?>">

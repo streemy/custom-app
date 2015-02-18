@@ -5,9 +5,9 @@ class DB  {
     protected static $db = null;
 
     const HOST = 'localhost';
-    const NAME = 'db_test';
-    const USER = 'streem';
-    const PASS = 'MaNu2015';
+    const NAME = 'custom-cms';
+    const USER = 'root';
+    const PASS = 'qwe123';
 
     public static function getInstance()
     {
