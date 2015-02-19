@@ -38,10 +38,15 @@ class FilmController extends Controller
         }
 
         if(is_array($films)) {
-            foreach($films as $film) {
-                $filmName = $film['name'];
-                $filmName = preg_replace("#".$_POST['str']."#ius", '<b style="color: red;">'.$_POST['str'].'</b>', $filmName);
-                echo $filmName.'<br/>';
+            if(count($films) > 0) {
+                foreach($films as $film) {
+                    $filmName = $film['name'];
+                    $filmName = preg_replace("#".$_POST['str']."#ius", '<b style="color: red;">'.$_POST['str'].'</b>', $filmName);
+                    echo $filmName.'<br/>';
+                }
+            } else {
+                echo 'По вашему запросу нечего не найдено';
+                return;
             }
         } else {
             echo 'Ошибка: фильмы не массив';
