@@ -1,3 +1,6 @@
+application/core/DB.php
+application/Uploads
+
 .idea
 .idea/*
 .idea/*/*
